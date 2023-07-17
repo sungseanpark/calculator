@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    min-height: 100vh;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-radius: 3px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+}
