@@ -30,3 +30,12 @@ button {
     width: 65px;
     height: 30px;
 }
+
+.display {
+    width: 135px;
+    height: 30px;
+    border-style: solid;
+    border-radius: 3px;
+    text-align: end;
+    line-height: 30px;
+}
