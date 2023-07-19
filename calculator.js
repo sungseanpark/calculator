@@ -47,6 +47,10 @@ function displayNumber(e) {
             displayContent += e.target.textContent;
             displayElem.textContent = displayContent;
             break;
+        case 'evaluated':
+            displayContent = '' + e.target.textContent;
+            displayElem.textContent = displayContent;
+            state = 'firstNum';
     }
 
 }
@@ -54,6 +58,20 @@ function displayNumber(e) {
 function displayOperator(e) {
     switch(state){
         case 'firstNum':
+            firstNum = Number(displayContent);
+            operator = e.target.textContent;
+            state = 'operator';
+            break;
+        case 'operator':
+            operator = e.target.textContent;
+            break;
+        case 'secondNum':
+            evaluateExpression();
+            firstNum = Number(displayContent);
+            operator = e.target.textContent;
+            state = 'operator';
+            break;
+        case 'evaluated':
             firstNum = Number(displayContent);
             operator = e.target.textContent;
             state = 'operator';
@@ -72,11 +90,22 @@ function evaluateExpression() {
     state = 'evaluated';
 }
 
+function clear() {
+    firstNum = undefined;
+    secondNum = undefined;
+    operator = undefined;
+    displayContent = '';
+    displayElem.textContent = displayContent;
+    state = 'firstNum';
+}
+
 let firstNum;
 let secondNum;
 let operator;
 let displayContent = '';
 let state = 'firstNum';
+
+console.log(firstNum);
 
 const displayElem = document.querySelector('.display');
 
@@ -90,5 +119,9 @@ operatorButtons.forEach(button => {
 });
 
 const evalButton = document.querySelector('.eval');
+
+const clearButton = document.querySelector('#clear');
+
+clearButton.addEventListener('click', clear)
 
 
