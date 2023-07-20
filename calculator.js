@@ -53,7 +53,7 @@ function displayNumber(e) {
             state = 'firstNum';
     }
 
-}
+};
 
 function displayOperator(e) {
     switch(state){
@@ -79,7 +79,7 @@ function displayOperator(e) {
 
     }
 
-}
+};
 
 function evaluateExpression() {
     secondNum = Number(displayContent);
@@ -88,15 +88,20 @@ function evaluateExpression() {
     displayElem.textContent = displayContent;
     evalButton.removeEventListener('click', evaluateExpression);
     state = 'evaluated';
-}
+};
 
-function clear() {
+function clearCalc() {
     firstNum = undefined;
     secondNum = undefined;
     operator = undefined;
     displayContent = '';
     displayElem.textContent = displayContent;
     state = 'firstNum';
+};
+
+function deleteCalc() {
+    displayContent = displayContent.slice(0,displayContent.length -1);
+    displayElem.textContent = displayContent;
 }
 
 let firstNum;
@@ -122,6 +127,10 @@ const evalButton = document.querySelector('.eval');
 
 const clearButton = document.querySelector('#clear');
 
-clearButton.addEventListener('click', clear)
+clearButton.addEventListener('click', clearCalc);
+
+const deleteButton = document.querySelector('#delete');
+
+deleteButton.addEventListener('click', deleteCalc);
 
 
