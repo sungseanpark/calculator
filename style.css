@@ -45,6 +45,7 @@ body {
     border-radius: 3px;
     padding: 10px;
     gap: 5px;
+    background-color: #666666;
 }
 
 .row {
@@ -58,17 +59,22 @@ button {
     height: 60px;
     font-size: 20px;
     font-family: 'adelle_rgregular', sans-serif;
+    border-color: black;
+    border-radius: 3px;
+    border-style: solid;
 }
 
 .cd {
     width: 130px;
     height: 60px;
+    background-color: orange;
 }
 
 .display {
     width: 255px;
     height: 60px;
     border-style: solid;
+    border-color: black;
     border-radius: 3px;
     text-align: end;
     line-height: 60px;
@@ -76,4 +82,17 @@ button {
     font-size: 40px;
     font-family: 'adelle_rgregular', sans-serif;
     margin-bottom: 5px;
+    background-color: white;
+}
+
+.operator {
+    background-color: #0096FF;
+}
+
+.eval {
+    background-color: lightgreen;
+}
+
+button:hover {
+    background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
 }
