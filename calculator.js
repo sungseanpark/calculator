@@ -46,9 +46,10 @@ function displayNumber(e) {
         case 'secondNum':
             displayContent += e.target.textContent;
             displayElem.textContent = displayContent;
+            evalButton.addEventListener('click', evaluateExpression);
             break;
         case 'evaluated':
-            displayContent = '' + e.target.textContent;
+            displayContent += e.target.textContent;
             displayElem.textContent = displayContent;
             state = 'firstNum';
     }
@@ -84,7 +85,7 @@ function displayOperator(e) {
 function evaluateExpression() {
     secondNum = Number(displayContent);
     let result = operate(firstNum, secondNum, operator);
-    displayContent = result;
+    displayContent = '' + result;
     displayElem.textContent = displayContent;
     evalButton.removeEventListener('click', evaluateExpression);
     state = 'evaluated';
@@ -95,13 +96,50 @@ function clearCalc() {
     secondNum = undefined;
     operator = undefined;
     displayContent = '';
-    displayElem.textContent = displayContent;
+    displayElem.textContent = '0';
     state = 'firstNum';
+    dotted = 'false';
 };
 
 function deleteCalc() {
     displayContent = displayContent.slice(0,displayContent.length -1);
     displayElem.textContent = displayContent;
+}
+
+function addDot() {
+    switch(state){
+        case 'firstNum':
+            if (displayContent.includes('.')) {
+                return;
+            }
+            if (displayContent == '') {
+                displayContent = '0.';
+                displayElem.textContent = displayContent;
+                return;
+            }
+            displayContent = displayElem.textContent + '.';
+            displayElem.textContent = displayContent;
+            break;
+        case 'operator':
+            displayContent = '0.';
+            displayElem.textContent = displayContent;
+            state = 'secondNum';
+            break;
+        case 'secondNum':
+            if (displayContent.includes('.')) {
+                return;
+            }
+            displayContent = displayElem.textContent + '.';
+            displayElem.textContent = displayContent;
+            break;
+        case 'evaluated':
+            if (displayContent.includes('.')) {
+                return;
+            }
+            displayContent = displayElem.textContent + '.';
+            displayElem.textContent = displayContent;
+            break;
+    }
 }
 
 let firstNum;
@@ -122,6 +160,9 @@ const operatorButtons = document.querySelectorAll('.operator');
 operatorButtons.forEach(button => {
     button.addEventListener('click', displayOperator);
 });
+
+const dotButton = document.querySelector('.dot');
+dotButton.addEventListener('click', addDot);
 
 const evalButton = document.querySelector('.eval');
 
